@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int count = 0;
+    public static int count = 0;
 
 
     @Override
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void onClickListener(View view){
+    public void onClickListener(View view){
         count++;
 
         Toast.makeText(MainActivity.this, count, Toast.LENGTH_SHORT).show();

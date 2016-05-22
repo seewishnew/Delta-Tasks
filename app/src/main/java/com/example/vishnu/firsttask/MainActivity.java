@@ -10,10 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String COUNT = "count";
     public int count = 0;
 
 
@@ -23,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(savedInstanceState!=null)
+        count = savedInstanceState.getInt(COUNT);
+
+        else
+        count = 0;
+
+        TextView textView = (TextView) findViewById(R.id.count);
+
+        textView.setText("" + count + " times");
 
 //       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(COUNT, count);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
     public void onClickListener(View view){
         count++;
 
-        Toast.makeText(MainActivity.this, ""+count, Toast.LENGTH_SHORT).show();
+        TextView textView = (TextView) findViewById(R.id.count);
+
+        textView.setText("" + count + " times");
+
     }
 }

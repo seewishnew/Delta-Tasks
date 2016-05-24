@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -30,7 +31,10 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     public static final String COUNT = "count";
+    public static final String INDEX = "Index";
     public int count = 0;
+    public int index = 0;
+
 
     private SharedPreferences preferences;
 
@@ -53,10 +57,13 @@ public class MainActivity extends AppCompatActivity {
         preferences = getPreferences(MODE_PRIVATE);
 
         count = preferences.getInt(COUNT, 0);
+        index = preferences.getInt(INDEX,0);
 
         TextView textView = (TextView) findViewById(R.id.count);
 
         textView.setText("" + count + " times");
+
+        setColor();
 
 //       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putInt(COUNT, count);
+        editor.putInt(INDEX, index);
 
         editor.commit();
 
@@ -121,15 +129,31 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.count);
 
-        textView.setText("" + count + " times");
+
+        if(count == 1)
+            textView.setText("1 time");
+
+        else
+            textView.setText("" + count + " times");
+
+
+
+        index = rand.nextInt(6);
+
+        setColor();
+
+
+
+    }
+
+
+    public void setColor(){
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        TextView textView = (TextView)findViewById(R.id.count);
         TextView textView1 = (TextView) findViewById(R.id.textView);
         Button button = (Button) findViewById(R.id.button);
         Button button1 = (Button) findViewById(R.id.reset);
-
-        int index = rand.nextInt(6);
-
 
         relativeLayout.setBackgroundColor(Color.parseColor(colors[index]));
 
@@ -142,9 +166,7 @@ public class MainActivity extends AppCompatActivity {
         button1.setTextColor(Color.parseColor(colors[index]));
         button1.setBackgroundColor(Color.parseColor(colors[5 - index]));
 
-
     }
-
 
     public void reset(View view){
         count = 0;

@@ -15,29 +15,13 @@
     android:background="#FFFFFF"
     android:id="@+id/relativeLayout">
 
-    <TextView
-        android:text="You have clicked the button:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/textView"
-        android:layout_above="@+id/button"
-        android:layout_alignParentStart="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" times"
-        android:id="@+id/count"
-        android:textSize="20sp"
-        android:layout_marginStart="74dp"
-        android:layout_alignBottom="@+id/button"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Click Me!"
         android:id="@+id/button"
+        android:textSize="@dimen/text_size_small"
+        android:padding="@dimen/button_width_padding"
         android:onClick="onClickListener"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
@@ -47,10 +31,39 @@
         android:layout_height="wrap_content"
         android:text="Reset"
         android:id="@+id/reset"
-        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/text_size_small"
+        android:padding="@dimen/button_width_padding"
+        android:layout_below="@id/button"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="48dp"
-        android:onClick="reset"/>
+        android:onClick="reset" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignEnd="@id/button"
+        android:layout_alignParentStart="true"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:text="You have clicked the button:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size"
+            android:id="@+id/textView"
+            android:padding="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" times"
+            android:id="@+id/count"
+            android:textSize="@dimen/text_size"
+            android:layout_marginStart="74dp"
+            android:padding="@dimen/activity_vertical_margin"
+            />
+    </LinearLayout>
 
 
 </RelativeLayout>

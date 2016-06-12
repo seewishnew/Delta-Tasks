@@ -24,12 +24,20 @@ import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 1;
     Paint paint;
     Canvas canvas;
+
+    private Timer timer;
+    private TimerTask timerTask;
+
+    float vX = 3;
+    float vY = 5;
 
     private float c, r;
 
@@ -352,6 +360,38 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+            else if(result.contains("bounce")){
+
+
+                timer = new Timer();
+
+                timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        update();
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                refreshSmiley();
+                            }
+                        });
+                    }
+                };
+
+
+                timer.schedule(timerTask, 0, 10);
+
+
+            }
+
+            else if(result.contains("stop")){
+                timerTask.cancel();
+                timer.cancel();
+                timer.purge();
+            }
+
+
             else
                 Toast.makeText(MainActivity.this, "No such command ;P", Toast.LENGTH_SHORT).show();
 
@@ -360,6 +400,44 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
+    public void update(){
+
+        if(vX>0) {
+
+            if (X + 2 * r + vX + 60> screenWidth) {
+                vX = -vX;
+            }
+        }
+
+        else
+        {
+            if(X+vX<0){
+                vX = -vX;
+            }
+        }
+
+        if(vY>0){
+            if(Y+2*r+vY+bHeight>screenHeight){
+                vY = -vY;
+            }
+        }
+
+
+        else{
+            if(Y+vY<0){
+                vY=-vY;
+            }
+        }
+
+        X+=vX;
+        Y+=vY;
+        canvas.translate(vX, vY);
+
+
+    }
+
 
     private void refreshSmiley() {
         b.eraseColor(Color.RED);

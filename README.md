@@ -31,7 +31,7 @@ the movement is controlled by a certain number of pixels that is dependent on sc
 
 The new feature animates the smiley face across the screen and bounces across the borders, like a screensaver. This mode is called upon the voice command, "bounce." To stop, you can simply say, "stop."
 
-Note that you can also give other commands to the smiley while this animation goes on.
+Note that you can also give other commands to the smiley while this animation keeps going on.
 
 All the dimensions of all the objects in the app are dependent on screen dimensions. So it should adapt to different screen sizes
 properly.
